@@ -1,558 +1,1195 @@
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800&display=swap');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Puneet Tewary — Program Manager</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Sora:wght@200;300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-:root {
-  --bg: #FAFBFD;
-  --surface: #FFFFFF;
-  --surface2: #F2F4F8;
-  --navy: #051C2C;
-  --navy2: #0A2540;
-  --blue: #0066FF;
-  --blue2: #4D94FF;
-  --teal: #00A3BF;
-  --text: #051C2C;
-  --text2: #5A6B7F;
-  --text3: #8E99A8;
-  --border: #E2E8F0;
-  --border2: #D0D8E4;
-  --gold: #C4960C;
-}
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        :root {
+            --bg: #0A0A0B;
+            --surface: #111113;
+            --surface-2: #1A1A1D;
+            --surface-3: #222226;
+            --text: #E8E6E3;
+            --text-muted: #8A8A8E;
+            --accent: #E8493A;
+            --accent-glow: rgba(232, 73, 58, 0.15);
+            --gold: #D4A853;
+            --gold-glow: rgba(212, 168, 83, 0.1);
+            --border: rgba(255,255,255,0.06);
+            --serif: 'Playfair Display', Georgia, serif;
+            --sans: 'Sora', system-ui, sans-serif;
+            --mono: 'Space Mono', monospace;
+        }
 
-/* NAV */
-.nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 16px 40px; display: flex; justify-content: space-between; align-items: center;
-  background: rgba(255,255,255,0.85); backdrop-filter: blur(24px);
-  border-bottom: 1px solid transparent; transition: all 0.3s;
-}
-.nav.scrolled { border-bottom-color: var(--border); }
-.nav-brand { font-family: 'Playfair Display', serif; font-size: 18px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-.nav-links { display: flex; gap: 28px; }
-.nav-links a {
-  color: var(--text2); font-size: 11px; text-decoration: none;
-  letter-spacing: 2px; text-transform: uppercase; font-weight: 500;
-  transition: color 0.3s; cursor: pointer;
-  position: relative;
-}
-.nav-links a::after {
-  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1.5px;
-  background: var(--blue); transition: width 0.3s;
-}
-.nav-links a:hover { color: var(--navy); }
-.nav-links a:hover::after { width: 100%; }
+        html { scroll-behavior: smooth; }
 
-/* HERO */
-.hero {
-  min-height: 100vh; display: flex; flex-direction: column;
-  justify-content: center; align-items: center; text-align: center;
-  position: relative; padding: 100px 24px 60px;
-  background: var(--navy);
-  overflow: hidden;
-}
-.hero-grid {
-  position: absolute; inset: 0; opacity: 0.03;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px);
-  background-size: 60px 60px;
-}
-.hero-line {
-  position: absolute; background: var(--blue); opacity: 0.07;
-}
-.hl1 { width: 1px; height: 40%; top: 0; left: 20%; animation: growDown 2s ease both; }
-.hl2 { width: 1px; height: 30%; bottom: 0; right: 25%; animation: growUp 2s ease 0.3s both; }
-.hl3 { height: 1px; width: 35%; top: 35%; left: 0; animation: growRight 2s ease 0.6s both; }
-.hl4 { height: 1px; width: 25%; bottom: 40%; right: 0; animation: growLeft 2s ease 0.9s both; }
+        body {
+            font-family: var(--sans);
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
 
-.hero-content { position: relative; z-index: 2; max-width: 800px; }
-.hero-rule {
-  width: 48px; height: 2px; background: var(--blue); margin: 0 auto 28px;
-  animation: fadeUp 0.8s ease 0.1s both;
-}
-.hero-tag {
-  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
-  color: var(--blue2); margin-bottom: 24px; font-weight: 500;
-  animation: fadeUp 0.8s ease 0.2s both;
-}
-.hero h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(42px, 7vw, 72px); font-weight: 700;
-  color: #fff; letter-spacing: -1px; line-height: 1.1; margin-bottom: 20px;
-  animation: fadeUp 0.8s ease 0.3s both;
-}
-.typewriter {
-  font-size: clamp(14px, 1.8vw, 18px); font-weight: 300;
-  color: rgba(255,255,255,0.55); max-width: 620px; margin: 0 auto 48px;
-  line-height: 1.7; min-height: 50px;
-  animation: fadeUp 0.8s ease 0.4s both;
-}
-.cursor { animation: blink 1s step-end infinite; color: var(--blue); }
 
-.hero-metrics {
-  display: flex; gap: 1px; justify-content: center; flex-wrap: wrap;
-  animation: fadeUp 0.8s ease 0.6s both;
-  background: rgba(255,255,255,0.05); border-radius: 12px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.08);
-}
-.metric {
-  padding: 28px 36px; text-align: center;
-  background: rgba(255,255,255,0.02);
-  transition: background 0.3s;
-  min-width: 140px;
-}
-.metric:hover { background: rgba(255,255,255,0.06); }
-.metric-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 32px; font-weight: 700; color: #fff; margin-bottom: 4px;
-}
-.metric-num .accent { color: var(--blue2); }
-.metric-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.4); }
-.metric + .metric { border-left: 1px solid rgba(255,255,255,0.06); }
+        /* ═══════ CURSOR GLOW ═══════ */
+        .cursor-glow {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(232,73,58,0.04) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+            transform: translate(-50%, -50%);
+            transition: left 0.3s ease, top 0.3s ease;
+        }
 
-.scroll-cue {
-  position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  animation: bounce 2.5s infinite;
-}
-.scroll-cue span { font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25); }
-.scroll-cue-line { width: 1px; height: 32px; background: linear-gradient(to bottom, var(--blue2), transparent); }
+        /* ═══════ GRAIN OVERLAY ═══════ */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 9998;
+        }
 
-/* SECTIONS */
-section { padding: 48px 24px; max-width: 1060px; margin: 0 auto; position: relative; }
-.section-label {
-  font-size: 10px; text-transform: uppercase; letter-spacing: 4px;
-  color: var(--blue); margin-bottom: 10px; font-weight: 600;
-}
-.section-title {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(26px, 3.5vw, 36px); font-weight: 700;
-  margin-bottom: 12px; letter-spacing: -0.5px; color: var(--navy);
-}
-.section-rule { width: 40px; height: 2px; background: var(--blue); margin-bottom: 24px; }
+        /* ═══════ NAV ═══════ */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 100;
+            padding: 1.25rem 4vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            background: rgba(10,10,11,0.7);
+            border-bottom: 1px solid var(--border);
+        }
 
-/* IMPACT */
-.impact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
-.impact-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 28px 24px; transition: all 0.4s;
-  position: relative;
-}
-.impact-card:hover { box-shadow: 0 12px 40px rgba(5,28,44,0.08); transform: translateY(-4px); border-color: var(--border2); }
-.impact-card::before {
-  content: ''; position: absolute; top: 0; left: 24px; right: 24px; height: 1px;
-  background: transparent; transition: background 0.3s;
-}
-.impact-card:hover::before { background: var(--blue); }
-.impact-icon { font-size: 24px; margin-bottom: 16px; display: block; }
-.impact-num { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
-.impact-label { font-size: 13px; color: var(--text2); line-height: 1.55; }
+        .nav-logo {
+            font-family: var(--serif);
+            font-size: 1.15rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
 
-/* TIMELINE */
-.timeline { position: relative; padding-left: 2px; }
-.timeline::before {
-  content: ''; position: absolute; left: 11px; top: 0; bottom: 0; width: 1px;
-  background: linear-gradient(to bottom, var(--blue), var(--border), transparent);
-}
-.tl-item { position: relative; padding-left: 48px; margin-bottom: 28px; opacity: 0; transform: translateY(20px); transition: all 0.7s ease; }
-.tl-item.visible { opacity: 1; transform: translateY(0); }
-.tl-dot {
-  position: absolute; left: 4px; top: 8px; width: 16px; height: 16px;
-  border-radius: 50%; border: 2px solid var(--border2); background: var(--bg);
-  transition: all 0.4s;
-}
-.tl-dot.active { border-color: var(--blue); background: var(--blue); box-shadow: 0 0 0 4px rgba(0,102,255,0.1); }
-.tl-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 28px; transition: all 0.3s;
-}
-.tl-card:hover { box-shadow: 0 8px 32px rgba(5,28,44,0.06); border-color: var(--border2); }
-.tl-dates { font-size: 11px; color: var(--blue); font-weight: 600; letter-spacing: 2px; margin-bottom: 6px; text-transform: uppercase; }
-.tl-company { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
-.tl-role { font-size: 14px; color: var(--text2); font-weight: 400; margin-bottom: 16px; font-style: italic; }
-.tl-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 14px; }
-.tl-chip {
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: 4px; padding: 4px 12px; font-size: 11px; color: var(--text2); font-weight: 500;
-}
-.tl-desc { font-size: 14px; color: var(--text2); line-height: 1.7; }
+        .nav-logo span { color: var(--accent); }
 
-/* PROGRAMS */
-.programs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
-.prog-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 24px; transition: all 0.4s;
-  position: relative;
-}
-.prog-card:hover { box-shadow: 0 8px 32px rgba(5,28,44,0.06); border-color: var(--blue); transform: translateY(-2px); }
-.prog-card::before {
-  content: ''; position: absolute; left: 0; top: 16px; bottom: 16px; width: 3px;
-  border-radius: 2px; opacity: 0; transition: opacity 0.3s;
-}
-.prog-card:hover::before { opacity: 1; }
-.prog-card:nth-child(1)::before { background: var(--blue); }
-.prog-card:nth-child(2)::before { background: var(--teal); }
-.prog-card:nth-child(3)::before { background: var(--gold); }
-.prog-card:nth-child(4)::before { background: var(--blue); }
-.prog-card:nth-child(5)::before { background: var(--teal); }
-.prog-card:nth-child(6)::before { background: var(--gold); }
-.prog-head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
-.prog-icon {
-  width: 36px; height: 36px; border-radius: 6px;
-  display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
-  background: var(--surface2); border: 1px solid var(--border);
-}
-.prog-name { font-size: 14px; font-weight: 700; color: var(--navy); line-height: 1.3; }
-.prog-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
 
-/* SKILLS */
-.skills-section { display: flex; gap: 48px; flex-wrap: wrap; align-items: flex-start; }
-.skills-bars { flex: 1; min-width: 300px; }
-.skill-bar-item { margin-bottom: 18px; }
-.skill-bar-label { display: flex; justify-content: space-between; font-size: 12px; margin-bottom: 6px; font-weight: 500; }
-.skill-bar-name { color: var(--navy); }
-.skill-bar-pct { color: var(--text3); font-weight: 400; }
-.skill-bar-track { height: 4px; border-radius: 2px; background: var(--surface2); overflow: hidden; }
-.skill-bar-fill { height: 100%; border-radius: 2px; width: 0; transition: width 1.5s ease; }
-.skill-bar-fill.visible { width: var(--w); }
-.sbf1 { background: var(--navy); }
-.sbf2 { background: var(--blue); }
-.sbf3 { background: var(--navy); }
-.sbf4 { background: var(--teal); }
-.sbf5 { background: var(--blue); }
-.sbf6 { background: var(--navy); }
+        .nav-links a {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
 
-.skills-pills { flex: 1; min-width: 260px; }
-.skills-wrap { display: flex; flex-wrap: wrap; gap: 8px; }
-.skill-pill {
-  padding: 8px 18px; border-radius: 4px; font-size: 12px; font-weight: 500;
-  border: 1px solid var(--border); background: var(--surface);
-  color: var(--text2); transition: all 0.3s; cursor: default;
-}
-.skill-pill:hover { border-color: var(--blue); color: var(--navy); }
-.skill-pill.glow { background: var(--navy); color: #fff; border-color: var(--navy); }
+        .nav-links a:hover { color: var(--accent); }
 
-/* EDUCATION */
-.edu-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
-.edu-card {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 8px; padding: 24px; border-top: 3px solid var(--navy);
-}
-.edu-type { font-size: 10px; text-transform: uppercase; letter-spacing: 2px; color: var(--blue); margin-bottom: 8px; font-weight: 600; }
-.edu-degree { font-family: 'Playfair Display', serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
-.edu-school { font-size: 13px; color: var(--text2); }
-.edu-year { font-size: 11px; color: var(--text3); margin-top: 10px; font-weight: 500; letter-spacing: 1px; }
+        /* ═══════ HERO ═══════ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5vw;
+            position: relative;
+            overflow: hidden;
+        }
 
-/* CERTS */
-.cert-grid-compact { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px; }
-.cert-compact {
-  display: flex; align-items: center; gap: 14px;
-  padding: 12px 16px; background: var(--surface); border: 1px solid var(--border);
-  border-radius: 6px; transition: all 0.3s;
-}
-.cert-compact:hover { border-color: var(--blue); box-shadow: 0 4px 16px rgba(5,28,44,0.04); }
-.cert-logo {
-  width: 32px; height: 32px; border-radius: 6px; object-fit: contain;
-  background: var(--surface2); padding: 3px; flex-shrink: 0; border: 1px solid var(--border);
-}
-.cert-logo-fallback {
-  width: 32px; height: 32px; border-radius: 6px;
-  align-items: center; justify-content: center;
-  font-size: 9px; font-weight: 800; color: #fff; flex-shrink: 0;
-}
-.cert-compact-info { flex: 1; min-width: 0; }
-.cert-compact-name { font-size: 12px; font-weight: 600; color: var(--navy); line-height: 1.3; }
-.cert-compact-org { font-size: 10px; color: var(--text3); margin-top: 1px; }
+        .hero-bg-text {
+            position: absolute;
+            font-family: var(--serif);
+            font-size: clamp(15rem, 25vw, 30rem);
+            font-weight: 900;
+            color: rgba(255,255,255,0.015);
+            right: -5%;
+            top: 50%;
+            transform: translateY(-50%);
+            line-height: 0.85;
+            pointer-events: none;
+            user-select: none;
+        }
 
-/* CONTACT */
-.contact-section {
-  text-align: center; padding: 48px 24px;
-  background: var(--navy); position: relative;
-}
-.contact-section .section-label { color: var(--blue2); }
-.contact-cta {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(28px, 4vw, 40px); font-weight: 700; color: #fff;
-  margin-bottom: 8px; letter-spacing: -0.5px;
-}
-.contact-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 32px; font-weight: 300; }
-.contact-links { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-.contact-link {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 28px; border-radius: 6px;
-  background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-  color: rgba(255,255,255,0.8); font-size: 13px; font-weight: 500; text-decoration: none;
-  transition: all 0.3s;
-}
-.contact-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.2); color: #fff; transform: translateY(-2px); }
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            pointer-events: none;
+        }
 
-.footer {
-  text-align: center; padding: 20px; font-size: 10px; color: rgba(255,255,255,0.25);
-  background: var(--navy); letter-spacing: 2px; text-transform: uppercase;
-  border-top: 1px solid rgba(255,255,255,0.04);
-}
+        .hero-orb-1 {
+            width: 400px; height: 400px;
+            background: var(--accent-glow);
+            top: 10%; right: 15%;
+            animation: orbFloat 8s ease-in-out infinite;
+        }
 
-/* ANIMATIONS */
-@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-@keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
-@keyframes blink { 50% { opacity: 0; } }
-@keyframes growDown { from { height: 0; } to { height: 40%; } }
-@keyframes growUp { from { height: 0; } to { height: 30%; } }
-@keyframes growRight { from { width: 0; } to { width: 35%; } }
-@keyframes growLeft { from { width: 0; } to { width: 25%; } }
-.fade-in { opacity: 0; transform: translateY(24px); transition: all 0.8s ease; }
-.fade-in.visible { opacity: 1; transform: translateY(0); }
+        .hero-orb-2 {
+            width: 300px; height: 300px;
+            background: var(--gold-glow);
+            bottom: 15%; left: 10%;
+            animation: orbFloat 10s ease-in-out infinite reverse;
+        }
 
-@media (max-width: 600px) {
-  .nav-links { display: none; }
-  .hero-metrics { flex-direction: column; }
-  .metric + .metric { border-left: none; border-top: 1px solid rgba(255,255,255,0.06); }
-  .skills-section { flex-direction: column; }
-  .metric { padding: 20px 28px; }
-}
-</style>
+        .hero-content { position: relative; z-index: 2; max-width: 800px; }
 
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div class="nav-brand">Puneet Tewary</div>
-  <div class="nav-links">
-    <a onclick="document.getElementById('impact').scrollIntoView({behavior:'smooth'})">Impact</a>
-    <a onclick="document.getElementById('journey').scrollIntoView({behavior:'smooth'})">Journey</a>
-    <a onclick="document.getElementById('programs').scrollIntoView({behavior:'smooth'})">Programs</a>
-    <a onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})">Skills</a>
-    <a onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Contact</a>
-  </div>
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            background: var(--accent-glow);
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.2s;
+        }
+
+        .badge-dot {
+            width: 6px; height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+
+        .hero h1 {
+            font-family: var(--serif);
+            font-size: clamp(3.5rem, 9vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -3px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.4s;
+        }
+
+        .hero h1 .line-2 {
+            display: block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-desc {
+            font-size: clamp(0.95rem, 1.5vw, 1.15rem);
+            font-weight: 300;
+            color: var(--text-muted);
+            max-width: 560px;
+            margin-top: 2rem;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.6s;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2.5rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease forwards 0.8s;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.85rem 1.75rem;
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid;
+            transition: all 0.35s ease;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border-color: var(--border);
+            color: var(--text-muted);
+        }
+
+        .btn-ghost:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+
+        .btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        /* ═══════ MARQUEE ═══════ */
+        .marquee-wrap {
+            border-top: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .marquee {
+            display: flex;
+            gap: 1rem;
+            animation: marquee 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee-item {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #FFFFFF;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .marquee-item::after {
+            content: '\25C6';
+            color: var(--accent);
+            font-size: 0.5rem;
+        }
+
+        /* ═══════ SECTIONS ═══════ */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 5vw; }
+
+        section { padding: 3rem 0; position: relative; }
+
+        .section-label {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            margin-bottom: 2rem;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        /* ═══════ STATS GRID ═══════ */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1px;
+            background: var(--border);
+            border: 1px solid var(--border);
+        }
+
+        .stat-card {
+            background: var(--surface);
+            padding: 2.5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .stat-card:hover::before { opacity: 1; }
+
+        .stat-number {
+            font-family: var(--serif);
+            font-size: 3rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            position: relative;
+        }
+
+        .stat-text {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            margin-top: 0.75rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        /* ═══════ EXPERIENCE TIMELINE ═══════ */
+        .exp-item {
+            display: grid;
+            grid-template-columns: 240px 1fr;
+            gap: 3rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            position: relative;
+        }
+
+        .exp-item:last-child { border-bottom: none; }
+
+        .exp-left {
+            position: sticky;
+            top: 6rem;
+            align-self: start;
+        }
+
+        .exp-company {
+            font-family: var(--serif);
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .exp-role {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .exp-period {
+            font-family: var(--mono);
+            font-size: 0.68rem;
+            letter-spacing: 1.5px;
+            color: var(--accent);
+            margin-top: 0.75rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .exp-period::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        .exp-highlights { display: flex; flex-direction: column; gap: 1.25rem; }
+
+        .exp-highlight {
+            padding: 1.25rem 1.5rem;
+            background: var(--surface);
+            border-left: 2px solid var(--surface-3);
+            font-size: 0.9rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            transition: all 0.35s ease;
+        }
+
+        .exp-highlight:hover {
+            border-left-color: var(--accent);
+            background: var(--surface-2);
+            color: var(--text);
+            transform: translateX(4px);
+        }
+
+        .exp-highlight strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* ═══════ PROGRAMS BENTO ═══════ */
+        .bento {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-auto-rows: minmax(200px, auto);
+            gap: 1rem;
+        }
+
+        .bento-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .bento-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .bento-card:hover::after { transform: scaleX(1); }
+        .bento-card:hover { border-color: rgba(255,255,255,0.1); transform: translateY(-3px); }
+
+        .bento-card:nth-child(1) { grid-column: span 2; }
+        .bento-card:nth-child(4) { grid-column: span 2; }
+
+        .bento-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--accent-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+        }
+
+        .bento-icon svg {
+            width: 20px; height: 20px;
+            stroke: var(--accent);
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .bento-card h3 {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        .bento-card p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .bento-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-top: 1rem;
+        }
+
+        .bento-tag {
+            font-family: var(--mono);
+            font-size: 0.6rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            border-radius: 2px;
+        }
+
+        /* ═══════ SKILLS ═══════ */
+        .skills-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .skill-category h3 {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .skill-category h3::before {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .skill-bars { display: flex; flex-direction: column; gap: 1rem; }
+
+        .skill-bar-item label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.82rem;
+            margin-bottom: 0.4rem;
+            color: var(--text-muted);
+        }
+
+        .skill-bar-item label span { color: var(--accent); font-family: var(--mono); font-size: 0.72rem; }
+
+        .skill-bar {
+            height: 4px;
+            background: var(--surface-2);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+            border-radius: 2px;
+            width: 0;
+            transition: width 1.2s ease;
+        }
+
+        /* ═══════ CERTS ═══════ */
+        .certs-list { display: flex; flex-direction: column; gap: 0.75rem; }
+
+        .cert-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.15rem 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .cert-row:hover {
+            border-color: var(--accent);
+            background: var(--surface-2);
+            transform: translateX(4px);
+        }
+
+        .cert-info { display: flex; align-items: center; gap: 1rem; }
+
+        .cert-num {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--accent);
+            width: 28px;
+        }
+
+        .cert-name {
+            font-weight: 500;
+            font-size: 0.92rem;
+        }
+
+        .cert-issuer {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            text-align: right;
+            min-width: 120px;
+        }
+
+        /* ═══════ EDUCATION ═══════ */
+        .edu-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+        }
+
+        .edu-card {
+            padding: 2.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--gold));
+        }
+
+        .edu-degree {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .edu-school {
+            font-size: 0.88rem;
+            color: var(--text-muted);
+            margin-top: 0.4rem;
+        }
+
+        .edu-year {
+            font-family: var(--mono);
+            font-size: 0.7rem;
+            color: var(--accent);
+            letter-spacing: 1.5px;
+            margin-top: 1rem;
+        }
+
+        /* ═══════ FOOTER ═══════ */
+        .footer {
+            padding: 3rem 5vw;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .footer-headline {
+            font-family: var(--serif);
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 1rem;
+        }
+
+        .footer-headline em {
+            font-style: italic;
+            background: linear-gradient(135deg, var(--accent), var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-sub {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-family: var(--mono);
+            font-size: 0.72rem;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-links a:hover { border-color: var(--accent); color: var(--accent); }
+        .footer-links a svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; }
+
+        .footer-copy {
+            margin-top: 3rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            font-family: var(--mono);
+            letter-spacing: 1px;
+        }
+
+        /* ═══════ ANIMATIONS ═══════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-30px, 20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════ RESPONSIVE ═══════ */
+        @media (max-width: 900px) {
+            .exp-item { grid-template-columns: 1fr; gap: 1.5rem; }
+            .exp-left { position: static; }
+            .bento { grid-template-columns: 1fr; }
+            .bento-card:nth-child(1), .bento-card:nth-child(4) { grid-column: span 1; }
+            .skills-section { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .edu-cards { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+
+
+        }
+
+        @media (max-width: 600px) {
+            .hero { padding: 0 6vw; }
+            .container { padding: 0 6vw; }
+            section { padding: 2rem 0; }
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .cert-issuer { display: none; }
+        }
+
+        @media print {
+            body::after, .cursor-glow { display: none; }
+            nav { display: none; }
+            .hero { min-height: auto; padding: 2rem; }
+            section { padding: 2rem 0; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+    <div class="nav-logo">PT<span>.</span></div>
+    <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#programs">Programs</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#certs">Credentials</a></li>
+        <li><a href="mailto:puneet.tewary@gmail.com">Email</a></li>
+        <li><a href="tel:+919711925980">Phone</a></li>
+        <li><a href="https://www.linkedin.com/in/tewary" target="_blank">LinkedIn</a></li>
+    </ul>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-grid"></div>
-  <div class="hero-line hl1"></div>
-  <div class="hero-line hl2"></div>
-  <div class="hero-line hl3"></div>
-  <div class="hero-line hl4"></div>
-  <div class="hero-content">
-    <div class="hero-rule"></div>
-    <div class="hero-tag">Program Manager · Adobe · Digital Experience</div>
-    <h1>Puneet Tewary</h1>
-    <div class="typewriter" id="typewriter"></div>
-    <div class="hero-metrics">
-      <div class="metric"><div class="metric-num" data-target="13" data-suffix="+">0</div><div class="metric-label">Years Experience</div></div>
-      <div class="metric"><div class="metric-num" data-prefix="$" data-target="3" data-suffix="M+">0</div><div class="metric-label">Business Value</div></div>
-      <div class="metric"><div class="metric-num" data-prefix="$" data-target="2" data-suffix="B">0</div><div class="metric-label">Revenue Impact</div></div>
-      <div class="metric"><div class="metric-num" data-target="10" data-suffix="+">0</div><div class="metric-label">Functions Led</div></div>
+<!-- ═══════ HERO ═══════ -->
+<header class="hero">
+    <div class="hero-bg-text">PT</div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-content">
+        <div class="hero-badge">
+            <span class="badge-dot"></span>
+            Open to Opportunities
+        </div>
+        <h1>
+            Puneet
+            <span class="line-2">Tewary</span>
+        </h1>
+        <p class="hero-desc">Program Manager with 13+ years driving AI transformation, sales operations, and strategic programs across Adobe's Digital Experience portfolio. Prosci-certified. IISc &amp; UT Austin educated.</p>
+        <div class="hero-actions">
+            <a href="mailto:puneet.tewary@gmail.com" class="btn btn-primary">
+                <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                Get in Touch
+            </a>
+            <a href="https://www.linkedin.com/in/tewary" target="_blank" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                LinkedIn
+            </a>
+            <a href="tel:+919711925980" class="btn btn-ghost">
+                <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                +91 9711925980
+            </a>
+        </div>
     </div>
-  </div>
-  <div class="scroll-cue"><span>Scroll</span><div class="scroll-cue-line"></div></div>
+    </div>
+</header>
+
+<!-- ═══════ MARQUEE ═══════ -->
+<div class="marquee-wrap">
+    <div class="marquee">
+        <span class="marquee-item">Program Management</span>
+        <span class="marquee-item">AI &amp; GenAI Strategy</span>
+        <span class="marquee-item">Change Management</span>
+        <span class="marquee-item">Sales Operations</span>
+        <span class="marquee-item">Stakeholder Alignment</span>
+        <span class="marquee-item">KPI &amp; Governance Design</span>
+        <span class="marquee-item">Portfolio Strategy</span>
+        <span class="marquee-item">Cross-Functional Leadership</span>
+        <span class="marquee-item">Program Management</span>
+        <span class="marquee-item">AI &amp; GenAI Strategy</span>
+        <span class="marquee-item">Change Management</span>
+        <span class="marquee-item">Sales Operations</span>
+        <span class="marquee-item">Stakeholder Alignment</span>
+        <span class="marquee-item">KPI &amp; Governance Design</span>
+        <span class="marquee-item">Portfolio Strategy</span>
+        <span class="marquee-item">Cross-Functional Leadership</span>
+    </div>
 </div>
 
-<!-- IMPACT -->
-<section class="fade-in" id="impact">
-  <div class="section-label">Measurable Impact</div>
-  <div class="section-title">Key outcomes delivered</div>
-  <div class="section-rule"></div>
-  <div class="impact-grid">
-    <div class="impact-card"><span class="impact-icon">⚡</span><div class="impact-num">$5 → $0.01</div><div class="impact-label">Cost per audit — reduced through AI automation across 100K+ annual audits</div></div>
-    <div class="impact-card"><span class="impact-icon">🌐</span><div class="impact-num">220+</div><div class="impact-label">Adobe Managed Partners given self-serve access to performance data</div></div>
-    <div class="impact-card"><span class="impact-icon">📊</span><div class="impact-num">$3M+</div><div class="impact-label">Quantified business value through restructuring & investment optimization</div></div>
-    <div class="impact-card"><span class="impact-icon">💡</span><div class="impact-num">$50K+</div><div class="impact-label">Annual savings from AI-driven audit automation across all DX solutions</div></div>
-  </div>
-</section>
-
-<!-- TIMELINE -->
-<section class="fade-in" id="journey">
-  <div class="section-label">Career Trajectory</div>
-  <div class="section-title">Professional journey</div>
-  <div class="section-rule"></div>
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-dot active"></div>
-      <div class="tl-card">
-        <div class="tl-dates">May 2016 – Present · 10 Years</div>
-        <div class="tl-company">Adobe Inc.</div>
-        <div class="tl-role">Program Manager – Customer Solutions, Operations / Portfolio / Strategy</div>
-        <div class="tl-chips">
-          <span class="tl-chip">AI Automation</span><span class="tl-chip">Change Management</span>
-          <span class="tl-chip">Executive Governance</span><span class="tl-chip">KPI Frameworks</span>
-          <span class="tl-chip">Multi-Stakeholder Orchestration</span>
+<!-- ═══════ STATS ═══════ -->
+<div class="container">
+    <section>
+        <div class="stats-grid reveal">
+            <div class="stat-card">
+                <div class="stat-number">13+</div>
+                <div class="stat-text">Years of Experience</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$3M+</div>
+                <div class="stat-text">Business Value Delivered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-text">Functions Orchestrated</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$2B</div>
+                <div class="stat-text">Revenue Reporting Impact</div>
+            </div>
         </div>
-        <div class="tl-desc">Spearheading enterprise-scale AI programs, directing end-to-end program lifecycles, and orchestrating engagement across 10+ functions including Legal, Ethics, Engineering, Data Science, PMO, and Customer Success. Championing change management and QBR/MBR governance for global sales and support.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot active"></div>
-      <div class="tl-card">
-        <div class="tl-dates">Adobe Inc. · Earlier Role</div>
-        <div class="tl-company" style="font-size:18px;">Program Manager – DMe Consumer & SMB Analytics</div>
-        <div class="tl-role"></div>
-        <div class="tl-chips">
-          <span class="tl-chip">$2B Revenue Impact</span><span class="tl-chip">220+ Partners</span>
-          <span class="tl-chip">Global Operations</span><span class="tl-chip">Commission Analytics</span>
+    </section>
+
+    <!-- ═══════ EXPERIENCE ═══════ -->
+    <section id="experience">
+        <div class="section-label reveal">01 — Experience</div>
+        <h2 class="section-title reveal">Where strategy meets<br><em>execution</em></h2>
+
+        <div class="exp-item reveal">
+            <div class="exp-left">
+                <div class="exp-company">Adobe Inc.</div>
+                <div class="exp-role">Program Manager — Customer Solutions, Operations / Portfolio / Strategy</div>
+                <div class="exp-period">May 2016 — Present</div>
+            </div>
+            <div class="exp-highlights">
+                <div class="exp-highlight">Spearheaded <strong>AI automation &amp; GenAI programs</strong> that slashed audit cost from $5 to under $0.01 across 100,000+ annual audits — delivering <strong>$500K+ in annual savings</strong>.</div>
+                <div class="exp-highlight">Established <strong>executive governance frameworks</strong> and integrated performance dashboards for Sales and Customer Engineering, enabling real-time, data-driven decision-making.</div>
+                <div class="exp-highlight">Defined <strong>KPI frameworks and adoption milestones</strong> for transformation programs — delivering over <strong>$3M in quantified business value</strong> through operational restructuring.</div>
+                <div class="exp-highlight">Championed <strong>change management strategies</strong> and led cross-functional communication plans across leadership, engineering, and support functions.</div>
+                <div class="exp-highlight">Managed DMe sales operations <strong>KPI reporting inventory</strong> contributing to a net reporting impact of <strong>$2B globally</strong>.</div>
+                <div class="exp-highlight">Built scalable infrastructure enabling <strong>220+ Adobe Managed Partners</strong> to access actionable reports for data-driven decision-making.</div>
+            </div>
         </div>
-        <div class="tl-desc">Managed the DMe sales operations KPI reporting inventory tied to $2B in global revenue. Led scalable reporting infrastructure for 220+ partners and anchored commission analytics across EMEA, AMER, and APAC.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-dates">2015 – 2016</div>
-        <div class="tl-company">Zinnov Management Consulting</div>
-        <div class="tl-role">Senior Analyst – Market Expansion Advisory</div>
-        <div class="tl-desc">Conducted primary and secondary research for market expansion engagements, delivering data-driven recommendations through quantitative and qualitative analysis.</div>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-card">
-        <div class="tl-dates">2012 – 2014</div>
-        <div class="tl-company">Aon Hewitt</div>
-        <div class="tl-role">Consulting Operations Analyst</div>
-        <div class="tl-desc">Supported global compensation consulting and survey operations across EMEA and APAC. Managed reporting, project coordination, and KPI measurement.</div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<!-- PROGRAMS -->
-<section class="fade-in" id="programs">
-  <div class="section-label">Program Portfolio</div>
-  <div class="section-title">Programs managed at Adobe</div>
-  <div class="section-rule"></div>
-  <div class="programs-grid">
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">⚙️</div><div class="prog-name">AI-Driven Audit Automation</div></div><div class="prog-desc">Led the program to transform QA and compliance for high-volume support cases through scalable AI systems across all DX solutions.</div></div>
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">📈</div><div class="prog-name">India Market Investment Optimization</div></div><div class="prog-desc">Managed the initiative to realign regional operations and investment strategies, enhancing efficiency in a key growth market.</div></div>
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">📱</div><div class="prog-name">Ultimate Success Mobile Platform</div></div><div class="prog-desc">Oversaw delivery of iOS/Android threat assessment models and a scalable accessibility testing framework.</div></div>
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">🎯</div><div class="prog-name">Success Capability Calibration</div></div><div class="prog-desc">Directed standardization of skills benchmarking across global customer success functions — TAMs, TADs, CSMs, CSAMs.</div></div>
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">🔗</div><div class="prog-name">Customer Lifecycle Intelligence</div></div><div class="prog-desc">Managed partner-facing insights infrastructure for 220+ Channel Partners to optimize engagement and revenue outcomes.</div></div>
-    <div class="prog-card"><div class="prog-head"><div class="prog-icon">💰</div><div class="prog-name">Global Sales Compensation Intelligence</div></div><div class="prog-desc">Led unified reporting architecture across EMEA, AMER, and APAC driving transparency in incentive structures.</div></div>
-  </div>
-</section>
+        <div class="exp-item reveal">
+            <div class="exp-left">
+                <div class="exp-company">Zinnov</div>
+                <div class="exp-role">Senior Analyst — Market Expansion Advisory</div>
+                <div class="exp-period">2015 — 2016</div>
+            </div>
+            <div class="exp-highlights">
+                <div class="exp-highlight">Conducted primary and secondary research for market expansion engagements, delivering <strong>data-driven recommendations</strong> through quantitative and qualitative analysis.</div>
+            </div>
+        </div>
 
-<!-- SKILLS -->
-<section class="fade-in" id="skills">
-  <div class="section-label">Expertise</div>
-  <div class="section-title">Core competencies</div>
-  <div class="section-rule"></div>
-  <div class="skills-section">
-    <div class="skills-bars">
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Strategic Program Management</span><span class="skill-bar-pct">Expert</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf1" style="--w:95%"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Change Management (Prosci)</span><span class="skill-bar-pct">Expert</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf2" style="--w:92%"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Stakeholder Alignment</span><span class="skill-bar-pct">Expert</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf3" style="--w:94%"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">AI Governance & Ethics</span><span class="skill-bar-pct">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf4" style="--w:88%"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Sales Operations & Analytics</span><span class="skill-bar-pct">Expert</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf5" style="--w:91%"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-label"><span class="skill-bar-name">Executive Governance</span><span class="skill-bar-pct">Advanced</span></div><div class="skill-bar-track"><div class="skill-bar-fill sbf6" style="--w:87%"></div></div></div>
-    </div>
-    <div class="skills-pills">
-      <div class="skills-wrap">
-        <span class="skill-pill glow">Ethical AI</span>
-        <span class="skill-pill glow">AI Governance</span>
-        <span class="skill-pill">Benefits Realization</span>
-        <span class="skill-pill">KPI Design</span>
-        <span class="skill-pill">Compensation Analytics</span>
-        <span class="skill-pill">Process Automation</span>
-        <span class="skill-pill">Scrum (CSM / CSPO)</span>
-        <span class="skill-pill">Executive Communication</span>
-      </div>
-    </div>
-  </div>
-</section>
+        <div class="exp-item reveal">
+            <div class="exp-left">
+                <div class="exp-company">Aon Hewitt</div>
+                <div class="exp-role">Consulting Operations Analyst</div>
+                <div class="exp-period">2012 — 2014</div>
+            </div>
+            <div class="exp-highlights">
+                <div class="exp-highlight">Supported <strong>global compensation consulting</strong> and survey operations across EMEA and APAC. Managed reporting, project coordination, and KPI measurement.</div>
+            </div>
+        </div>
+    </section>
 
-<!-- EDUCATION -->
-<section class="fade-in">
-  <div class="section-label">Education</div>
-  <div class="section-title">Academic foundation</div>
-  <div class="section-rule"></div>
-  <div class="edu-cards">
-    <div class="edu-card"><div class="edu-type">Post Graduate</div><div class="edu-degree">PGDM – Marketing & Operations</div><div class="edu-school">NIILM Center for Management Studies</div><div class="edu-year">2010 – 2012</div></div>
-    <div class="edu-card"><div class="edu-type">Undergraduate</div><div class="edu-degree">B.Tech – Electrical & Electronics Engineering</div><div class="edu-school">GBTU</div><div class="edu-year">2006 – 2010</div></div>
-  </div>
-</section>
+    <!-- ═══════ PROGRAMS ═══════ -->
+    <section id="programs">
+        <div class="section-label reveal">02 — Key Programs</div>
+        <h2 class="section-title reveal">Programs that moved<br><em>the needle</em></h2>
 
-<!-- CERTS -->
-<section class="fade-in">
-  <div class="section-label">Certifications</div>
-  <div class="section-title">Executive education</div>
-  <div class="section-rule"></div>
-  <div class="cert-grid-compact">
-    <div class="cert-compact"><img src="https://logo.clearbit.com/prosci.com" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#2d6da4;">P</div><div class="cert-compact-info"><div class="cert-compact-name">Prosci Certified Change Practitioner</div><div class="cert-compact-org">Prosci / MARG</div></div></div>
-    <div class="cert-compact"><img src="https://logo.clearbit.com/iisc.ac.in" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#1a3c6e;">IISc</div><div class="cert-compact-info"><div class="cert-compact-name">PG Certificate in AI & MLOps</div><div class="cert-compact-org">Indian Institute of Science</div></div></div>
-    <div class="cert-compact"><img src="https://logo.clearbit.com/utexas.edu" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#bf5700;">UT</div><div class="cert-compact-info"><div class="cert-compact-name">PG Program — AI & ML for Leaders</div><div class="cert-compact-org">University of Texas at Austin</div></div></div>
-    <div class="cert-compact"><img src="https://logo.clearbit.com/mit.edu" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#a31f34;">MIT</div><div class="cert-compact-info"><div class="cert-compact-name">Business Process Design for Strategic Mgmt</div><div class="cert-compact-org">MIT</div></div></div>
-    <div class="cert-compact"><img src="https://logo.clearbit.com/scrumalliance.org" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#009444;">SA</div><div class="cert-compact-info"><div class="cert-compact-name">Certified Scrum Master (CSM)</div><div class="cert-compact-org">Scrum Alliance</div></div></div>
-    <div class="cert-compact"><img src="https://logo.clearbit.com/scrumalliance.org" class="cert-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><div class="cert-logo-fallback" style="display:none;background:#009444;">SA</div><div class="cert-compact-info"><div class="cert-compact-name">Certified Scrum Product Owner (CSPO)</div><div class="cert-compact-org">Scrum Alliance</div></div></div>
-  </div>
-</section>
+        <div class="bento">
+            <div class="bento-card reveal">
+                <div>
+                    <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+                    <h3>AI-Driven Audit Automation</h3>
+                    <p>Transformed QA and compliance for high-volume support cases through scalable AI systems across all DX solutions. Cost per audit: $5 → $0.01.</p>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">AI</span>
+                    <span class="bento-tag">Automation</span>
+                    <span class="bento-tag">$500K Savings</span>
+                </div>
+            </div>
+            <div class="bento-card reveal">
+                <div>
+                    <div class="bento-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                    <h3>India Market Investment</h3>
+                    <p>Realigned regional operations and investment strategies for a key growth market.</p>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">Strategy</span>
+                    <span class="bento-tag">Operations</span>
+                </div>
+            </div>
+            <div class="bento-card reveal">
+                <div>
+                    <div class="bento-icon"><svg viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+                    <h3>Ultimate Success Mobile</h3>
+                    <p>iOS/Android threat assessment models and scalable accessibility testing framework.</p>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">Mobile</span>
+                    <span class="bento-tag">Security</span>
+                    <span class="bento-tag">A11y</span>
+                </div>
+            </div>
+            <div class="bento-card reveal">
+                <div>
+                    <div class="bento-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                    <h3>Customer Lifecycle Intelligence</h3>
+                    <p>Partner-facing insights infrastructure for 220+ Channel Partners to optimize engagement and revenue outcomes across the full lifecycle.</p>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">Analytics</span>
+                    <span class="bento-tag">Partners</span>
+                    <span class="bento-tag">220+ Partners</span>
+                </div>
+            </div>
+            <div class="bento-card reveal">
+                <div>
+                    <div class="bento-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                    <h3>Global Sales Comp Intelligence</h3>
+                    <p>Unified reporting architecture across EMEA, AMER, and APAC driving transparency in incentive structures.</p>
+                </div>
+                <div class="bento-tags">
+                    <span class="bento-tag">Sales Ops</span>
+                    <span class="bento-tag">Global</span>
+                    <span class="bento-tag">Compensation</span>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- CONTACT -->
-<div class="contact-section" id="contact">
-  <div class="section-label" style="margin-bottom:16px;">Get in Touch</div>
-  <div class="contact-cta">Let's connect</div>
-  <div class="contact-sub">Open to conversations about program leadership, AI governance, and strategic operations</div>
-  <div class="contact-links">
-    <a href="mailto:puneet.tewary@gmail.com" class="contact-link">✉ &nbsp;puneet.tewary@gmail.com</a>
-    <a href="tel:+919711925980" class="contact-link">📞 &nbsp;+91 97119 25980</a>
-    <a href="https://www.linkedin.com/in/tewary/" target="_blank" class="contact-link">🔗 &nbsp;LinkedIn</a>
-  </div>
+    <!-- ═══════ SKILLS ═══════ -->
+    <section id="skills">
+        <div class="section-label reveal">03 — Expertise</div>
+        <h2 class="section-title reveal">Skills that <em>deliver</em></h2>
+
+        <div class="skills-section reveal">
+            <div class="skill-category">
+                <h3>Strategy &amp; Leadership</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar-item">
+                        <label>Strategic Program Management <span>Expert</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="95%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Cross-Functional Alignment <span>Expert</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="92%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Change Management (Prosci) <span>Advanced</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="88%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Executive Governance <span>Advanced</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="90%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Portfolio Strategy <span>Advanced</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="87%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div class="skill-category">
+                <h3>Technical &amp; Operations</h3>
+                <div class="skill-bars">
+                    <div class="skill-bar-item">
+                        <label>AI Strategy &amp; Governance <span>Advanced</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="88%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Sales Operations &amp; Analytics <span>Expert</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="93%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>KPI Design &amp; Benefits Realization <span>Expert</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="91%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Process Optimization &amp; Automation <span>Advanced</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="86%"></div></div>
+                    </div>
+                    <div class="skill-bar-item">
+                        <label>Scrum (CSM / CSPO) <span>Certified</span></label>
+                        <div class="skill-bar"><div class="skill-bar-fill" data-width="85%"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ CERTIFICATIONS ═══════ -->
+    <section id="certs">
+        <div class="section-label reveal">04 — Credentials</div>
+        <h2 class="section-title reveal">Certifications &amp;<br><em>Executive Education</em></h2>
+
+        <div class="certs-list reveal">
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">01</span>
+                    <span class="cert-name">Prosci Certified Change Management Practitioner</span>
+                </div>
+                <span class="cert-issuer">Prosci / MARG</span>
+            </div>
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">02</span>
+                    <span class="cert-name">PG Advanced Certificate in AI &amp; MLOps</span>
+                </div>
+                <span class="cert-issuer">IISc Bengaluru</span>
+            </div>
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">03</span>
+                    <span class="cert-name">PG Program in AI &amp; ML for Leaders</span>
+                </div>
+                <span class="cert-issuer">UT Austin</span>
+            </div>
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">04</span>
+                    <span class="cert-name">Business Process Design</span>
+                </div>
+                <span class="cert-issuer">MIT</span>
+            </div>
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">05</span>
+                    <span class="cert-name">Certified Scrum Master (CSM)</span>
+                </div>
+                <span class="cert-issuer">Scrum Alliance</span>
+            </div>
+            <div class="cert-row">
+                <div class="cert-info">
+                    <span class="cert-num">06</span>
+                    <span class="cert-name">Certified Scrum Product Owner (CSPO)</span>
+                </div>
+                <span class="cert-issuer">Scrum Alliance</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════ EDUCATION ═══════ -->
+    <section>
+        <div class="section-label reveal">05 — Education</div>
+        <h2 class="section-title reveal">Academic <em>foundation</em></h2>
+
+        <div class="edu-cards reveal">
+            <div class="edu-card">
+                <div class="edu-degree">PGDM — Marketing &amp; Operations</div>
+                <div class="edu-school">NIILM Center for Management Studies</div>
+                <div class="edu-year">2010 — 2012</div>
+            </div>
+            <div class="edu-card">
+                <div class="edu-degree">B.Tech — Electrical &amp; Electronics</div>
+                <div class="edu-school">GBTU</div>
+                <div class="edu-year">2006 — 2010</div>
+            </div>
+        </div>
+    </section>
 </div>
-<div class="footer">© 2026 Puneet Tewary</div>
+
+<!-- ═══════ FOOTER ═══════ -->
+<footer class="footer reveal">
+    <div class="footer-headline">Let's build something <em>extraordinary</em></div>
+    <p class="footer-sub">Currently exploring new opportunities in program management, AI strategy, and operations leadership.</p>
+    <div class="footer-links">
+        <a href="mailto:puneet.tewary@gmail.com">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            puneet.tewary@gmail.com
+        </a>
+        <a href="https://www.linkedin.com/in/tewary" target="_blank">
+            <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            linkedin.com/in/tewary
+        </a>
+        <a href="tel:+919711925980">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            +91 9711925980
+        </a>
+    </div>
+    <div class="footer-copy">&copy; 2026 PUNEET TEWARY — BUILT WITH PURPOSE</div>
+</footer>
 
 <script>
-// TYPEWRITER
-const phrases = [
-  "Driving AI-powered transformation across Adobe's Digital Experience portfolio.",
-  "Delivering $3M+ in business value through operational strategy.",
-  "Orchestrating cross-functional programs across 10+ global functions.",
-  "Championing ethical AI governance and change management."
-];
-let pi=0, ci=0, del=false;
-const tw = document.getElementById('typewriter');
-function type() {
-  const p = phrases[pi];
-  if (!del) {
-    tw.innerHTML = p.substring(0, ci+1) + '<span class="cursor">|</span>';
-    ci++;
-    if (ci === p.length) { setTimeout(()=>{del=true;type();}, 2400); return; }
-    setTimeout(type, 35);
-  } else {
-    tw.innerHTML = p.substring(0, ci) + '<span class="cursor">|</span>';
-    ci--;
-    if (ci === 0) { del=false; pi=(pi+1)%phrases.length; setTimeout(type, 500); return; }
-    setTimeout(type, 18);
-  }
-}
-type();
+    const glow = document.getElementById('cursorGlow');
+    document.addEventListener('mousemove', e => {
+        glow.style.left = e.clientX + 'px';
+        glow.style.top = e.clientY + 'px';
+    });
 
-// NAV
-window.addEventListener('scroll', () => {
-  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
-});
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-// SCROLL ANIMATIONS
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-}, { threshold: 0.12 });
-document.querySelectorAll('.fade-in, .tl-item, .skill-bar-fill').forEach(el => obs.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// COUNTER
-let counted = false;
-const cObs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting && !counted) {
-      counted = true;
-      document.querySelectorAll('.metric-num').forEach(el => {
-        const t = parseInt(el.dataset.target);
-        const pre = el.dataset.prefix || '';
-        const suf = el.dataset.suffix || '';
-        let c = 0;
-        const step = Math.max(1, Math.floor(t / 25));
-        const timer = setInterval(() => {
-          c += step; if (c >= t) { c = t; clearInterval(timer); }
-          el.textContent = pre + c + suf;
-        }, 60);
-      });
-    }
-  });
-}, { threshold: 0.5 });
-document.querySelectorAll('.hero-metrics').forEach(el => cObs.observe(el));
+    const barObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.querySelectorAll('.skill-bar-fill').forEach(bar => {
+                    bar.style.width = bar.dataset.width;
+                });
+            }
+        });
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.skills-section').forEach(el => barObserver.observe(el));
 </script>
+
+</body>
+</html>
